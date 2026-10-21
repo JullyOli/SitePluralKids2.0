@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plural Kids - Kits de Autorregulação Sensorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-creme: #F7F4EE;
+            --azul-serenity: #A8DADC;
+            --verde-menta: #CDECCF;
+            --lilas-suave: #DCCEF9;
+            --coral-suave: #F6A89E;
+            --text-dark: #4F4F4F;
+            --title-dark: #3A3A3A;
+            --bg-white-pure: #FAFAF9;
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-subtle: 0 8px 30px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.08);
+            --border-radius-soft: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline-color: var(--azul-serenity);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-creme);
+            color: var(--text-dark);
+            font-family: 'Nunito', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--title-dark);
+            font-weight: 700;
+        }
+
+        section {
+            padding: 80px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInSection 1s forwards;
+        }
+
+        @keyframes fadeInSection {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container { width: 100%; margin-right: auto; margin-left: auto; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 32px; border-radius: 50px; font-family: 'Poppins', sans-serif;
+            font-weight: 600; font-size: 0.95rem; text-decoration: none; cursor: pointer;
+            transition: var(--transition-smooth); border: none; box-shadow: var(--shadow-subtle);
+        }
+        .btn-primary { background-color: var(--coral-suave); color: var(--title-dark); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(246, 168, 158, 0.3); filter: brightness(0.98); }
+        .btn-secondary { background-color: var(--azul-serenity); color: var(--title-dark); }
+        .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(168, 218, 220, 0.3); }
+        .btn-outline { background-color: transparent; border: 2px solid var(--azul-serenity); color: var(--title-dark); }
+        .btn-outline:hover { background-color: var(--azul-serenity); transform: translateY(-2px); }
+
+        .card {
+            background-color: var(--bg-white-pure); border-radius: var(--border-radius-soft);
+            padding: 32px; box-shadow: var(--shadow-subtle); transition: var(--transition-smooth);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+
+        /* HEADER */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; height: 70px;
+            background-color: rgba(247, 244, 238, 0.9); backdrop-filter: blur(10px);
+            z-index: 1000; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.02); transition: var(--transition-smooth);
+        }
+        .nav-container { max-width: 1200px; margin: 0 auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 48px; width: auto; border-radius: 8px; object-fit: contain; transition: var(--transition-smooth); }
+        .logo:hover .logo-img { transform: scale(1.05); }
+        .logo-text { font-size: 1.3rem; letter-spacing: 1px; font-family: 'Poppins', sans-serif; font-weight: 800; color: var(--title-dark); background: linear-gradient(135deg, var(--title-dark), #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav ul { display: flex; list-style: none; gap: 8px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 10px 18px; border-radius: 30px; transition: var(--transition-smooth); }
+        nav a:hover, nav a.active { background-color: var(--azul-serenity); color: var(--title-dark); }
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1100; }
+        .menu-toggle span { display: block; width: 25px; height: 3px; background-color: var(--title-dark); border-radius: 3px; transition: var(--transition-smooth); }
+
+        /* IMAGENS DE PRODUTOS */
+        .product-real-img {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 0 auto 16px auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            background-color: #fff;
+        }
+
+        /* HERO */
+        #inicio { min-height: 95vh; display: flex; align-items: center; justify-content: center; padding-top: 110px; background: radial-gradient(circle at 10% 20%, rgba(247, 244, 238, 0.8) 0%, rgba(168, 218, 220, 0.25) 45%, rgba(220, 206, 249, 0.2) 90%); border-radius: 0 0 40px 40px; }
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; width: 100%; }
+        .hero-content { display: flex; flex-direction: column; gap: 24px; }
+        .hero-title { font-size: 3rem; line-height: 1.15; color: var(--title-dark); font-weight: 800; }
+        .hero-subtitle { font-size: 1.15rem; color: var(--text-dark); font-weight: 400; max-width: 550px; }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+
+        /* CONFIGURADOR */
+        #monte-sua-caixa { background-color: var(--bg-white-pure); border-radius: 40px; margin-top: 40px; margin-bottom: 40px; }
+        .creator-grid { display: grid; grid-template-columns: 1.7fr 1fr; gap: 40px; position: relative; }
+        .creator-steps { display: flex; flex-direction: column; gap: 40px; }
+        .step-block { border-bottom: 2px dashed rgba(0, 0, 0, 0.05); padding-bottom: 40px; }
+        .step-block:last-child { border-bottom: none; padding-bottom: 0; }
+        .step-headline { font-size: 1.5rem; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .step-headline .badge { background-color: var(--azul-serenity); padding: 4px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; }
+        
+        .pack-options { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .pack-card { cursor: pointer; border: 3px solid transparent; text-align: center; padding: 24px; }
+        .pack-card.selected { border-color: var(--azul-serenity); background-color: var(--bg-creme); }
+        .pack-title { font-size: 1.15rem; margin-bottom: 6px; }
+        .pack-price { font-family: 'Poppins', sans-serif; color: var(--title-dark); font-weight: 700; font-size: 0.95rem; }
+
+        .products-counter { background-color: var(--verde-menta); padding: 12px 24px; border-radius: 50px; display: inline-block; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--title-dark); margin-bottom: 24px; }
+        .creator-products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 24px; }
+        .creator-product-card { border: 2px solid transparent; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; min-height: 480px; }
+        .creator-product-card.selected { border-color: var(--verde-menta); background-color: var(--bg-creme); }
+        .creator-product-name { font-size: 1rem; margin-bottom: 6px; text-align: center; font-weight: 700;}
+        .creator-product-price { font-family: 'Poppins', sans-serif; font-weight: 700; color: var(--title-dark); text-align: center; font-size: 1rem; margin-bottom: 12px; }
+
+        .suboptions-wrapper { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+        .suboptions-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-dark); letter-spacing: 0.5px; }
+        .select-input { width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08); background-color: var(--bg-white-pure); font-family: 'Nunito', sans-serif; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; }
+        
+        .qty-wrapper { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; }
+        .qty-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.1); background-color: var(--bg-white-pure); display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 700; }
+        .qty-input { width: 45px; text-align: center; font-family: 'Poppins', sans-serif; font-weight: 700; border: none; background: transparent; font-size: 0.95rem; }
+        
+        .creator-product-btn { width: 100%; padding: 10px; border-radius: 14px; border: none; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; margin-top: 14px; }
+        .creator-product-btn.add { background-color: var(--azul-serenity); color: var(--title-dark); }
+        .creator-product-btn.remove { background-color: var(--coral-suave); color: var(--title-dark); }
+
+        /* SIDEBAR / VITRINE / FOOTER */
+        .summary-sticky-column { position: relative; }
+        .summary-sidebar { position: sticky; top: 100px; background-color: var(--bg-creme); border-radius: var(--border-radius-soft); padding: 32px; box-shadow: var(--shadow-subtle); border: 2px solid var(--azul-serenity); display: flex; flex-direction: column; gap: 20px; }
+        .summary-title { font-size: 1.4rem; border-bottom: 2px dashed rgba(0, 0, 0, 0.05); padding-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .summary-item { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; }
+        .summary-totals { margin-top: 12px; border-top: 2px dashed rgba(0, 0, 0, 0.05); padding-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .total-row { display: flex; justify-content: space-between; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--title-dark); }
+        
+        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 32px; }
+        .showcase-card { background-color: var(--bg-white-pure); border-radius: var(--border-radius-soft); padding: 24px; text-align: center; border: 1px solid rgba(0, 0, 0, 0.02); box-shadow: var(--shadow-subtle); display: flex; flex-direction: column; align-items: center; }
+        .showcase-name { font-size: 1.15rem; margin-bottom: 8px; font-weight: 700; }
+        .showcase-price { font-family: 'Poppins', sans-serif; color: var(--title-dark); font-weight: 700; font-size: 1rem; margin-bottom: 12px; }
+
+        footer { background-color: var(--title-dark); color: var(--bg-creme); padding: 64px 24px 32px 24px; border-radius: 40px 40px 0 0; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; border-bottom: 1px solid rgba(247, 244, 238, 0.1); padding-bottom: 40px; margin-bottom: 30px; }
+        .footer-logo-img { height: 36px; width: auto; border-radius: 6px; object-fit: contain; background: white; padding: 2px; }
+
+        @media (max-width: 991px) {
+            .hero-grid, .creator-grid, .pack-options, .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .summary-sticky-column { order: -1; }
+            .summary-sidebar { position: relative; top: 0; border-width: 3px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#inicio" class="logo">
+                <img src="image_7fbdab.jpg" alt="Logo Plural Kids" class="logo-img" onerror="this.style.display='none'">
+                <span class="logo-text">PLURAL KIDS</span>
+            </a>
+            <button class="menu-toggle" id="menuBtn"><span></span><span></span><span></span></button>
+            <nav id="navbar">
+                <ul>
+                    <li><a href="#inicio" class="active">Início</a></li>
+                    <li><a href="#monte-sua-caixa">Monte Seu Kit</a></li>
+                    <li><a href="#vitrina-produtos">Galeria</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="inicio">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1 class="hero-title">Autorregulação com conforto, diversão e autonomia.</h1>
+                <p class="hero-subtitle">Kits sensoriais personalizados para ajudar crianças a explorarem emoções, desenvolverem autonomia e encontrarem conforto no dia a dia.</p>
+                <div class="hero-buttons">
+                    <a href="#monte-sua-caixa" class="btn btn-primary">Monte Seu Kit Plural</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONFIGURADOR INTERATIVO -->
+    <section id="monte-sua-caixa">
+        <div class="section-header">
+            <span class="section-tag" style="background-color: var(--verde-menta);">Exclusivo & Lúdico</span>
+            <h2 class="section-title">Configure seu Kit Plural</h2>
+            <p>Selecione uma embalagem e adicione os acessórios táteis de sua preferência. O Valor base do kit é de R$58,60</p>
+        </div>
+
+        <div class="creator-grid">
+            <div class="creator-steps">
+                
+                <!-- ETAPA 1 -->
+                <div class="step-block">
+                    <h3 class="step-headline"><span class="badge">Etapa 1</span> Escolha a Embalagem</h3>
+                    <div class="pack-options">
+                        <div class="card pack-card selected" id="pack-mochila" onclick="selectPack('Mochila Inflável 20 L', 46.20)">
+                            <img src="image_34f59f.png" alt="Mochila Inflável 20 L" class="product-real-img">
+                            <h4 class="pack-title">Mochila Inflável 20 L</h4>
+                            <p class="pack-price">R$ 46,20</p>
+                        </div>
+                        <div class="card pack-card" id="pack-maleta" onclick="selectPack('Maleta Translúcida Colorida', 45.25)">
+                            <img src="image_34a01b.jpg" alt="Maleta Translúcida Colorida" class="product-real-img">
+                            <h4 class="pack-title">Maleta Translúcida Colorida</h4>
+                            <p class="pack-price">R$ 45,25</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ETAPA 2 -->
+                <div class="step-block">
+                    <h3 class="step-headline"><span class="badge" style="background-color: var(--verde-menta);">Etapa 2</span> Adicione os Produtos</h3>
+                    <div class="products-counter" id="productsCounter">Produtos escolhidos: 0</div>
+                    <div class="creator-products-grid" id="creatorProductsGrid">
+                        <!-- Inserido via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAINEL LATERAL -->
+            <div class="summary-sticky-column">
+                <div class="summary-sidebar" id="summarySidebar">
+                    <h3 class="summary-title">Seu Kit Plural</h3>
+                    <div id="summaryContent" style="max-height: 400px; overflow-y: auto; padding-right: 4px;"></div>
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Valor Estimado:</span>
+                            <span id="summaryTotal">R$ 104,80</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="triggerCheckout()" style="width: 100%; border-radius: 18px; margin-top: 10px;">Finalizar Pedido</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vitrina-produtos">
+        <div class="section-header">
+            <span class="section-tag" style="background-color: var(--azul-serenity);">Vitrine Terapêutica</span>
+            <h2 class="section-title">Galeria de Estímulos</h2>
+            <p>Conheça nossa seleção atualizada com imagens reais dos brinquedos de modulação sensorial.</p>
+        </div>
+        <div class="showcase-grid" id="showcaseGrid">
+            <!-- Inserido via JS -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <a href="#inicio" class="footer-logo">
+                    <img src="image_7fbdab.jpg" alt="Logo Plural Kids" class="footer-logo-img" onerror="this.style.display='none'">
+                    <span class="footer-logo-text">PLURAL KIDS</span>
+                </a>
+                <p class="footer-desc">Soluções integradas de autorregulação emocional por meio do processamento tátil e visual estruturado para desenvolvimento infantojuvenil.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const productsData = [
+            {
+                id: "mochila-inflavel",
+                name: "Mochila Inflável 20 L",
+                price: 46.20,
+                description: "Proporciona compressão proprioceptiva suave nas costas.",
+                imgSrc: "image_34f59f.png",
+                category: "Embalagem"
+            },
+            {
+                id: "lesma-articulada",
+                name: "Lesma Articulada 20cm",
+                price: 19.25,
+                description: "Excelente ruído rítmico e maleabilidade que liberam energia tátil de forma suave.",
+                imgSrc: "image_340d3d.png",
+                category: "Estímulo Visual/Sonoro",
+                suboptionsTitle: "Formato do animal",
+                options: ["Borboleta", "Cobra", "Crocodilo", "Lagarta", "Lesma", "Tubarão"]
+            },
+            {
+                id: "lesma-chaveiro",
+                name: "Lesma Articulada Chaveiro",
+                price: 5.60,
+                description: "Dispositivo compacto e tátil para carregar na mochila.",
+                imgSrc: "image_349422.jpg",
+                category: "Portátil",
+                suboptionsTitle: "Modelo do Chaveiro",
+                options: ["Tradicional", "Metálica", "Glitter", "Brilha no Escuro"]
+            },
+            {
+                id: "animais-mochi",
+                name: "Animais Antistress Mochi Squish",
+                price: 1.35,
+                description: "Toque extremamente macio e emborrachado. (Mínimo 3 unidades)",
+                imgSrc: "image_340ddb.jpg",
+                category: "Tátil",
+                suboptionsTitle: "Modelos dos Bichinhos (Selecione 3)",
+                isMultipleSquish: true,
+                minQty: 3,
+                options: ["Axolote", "Cachorro", "Capivara", "Coelho", "Cordeiro", "Elefante", "Gato", "Panda"]
+            },
+            {
+                id: "pop-it",
+                name: "Pop It",
+                price: 15.90,
+                description: "Famosa bolha tátil com textura macia para contagem ritmada.",
+                imgSrc: "image_341121.jpg",
+                category: "Modulação Foco",
+                suboptionsTitle: "Formato",
+                options: ["Círculo", "Coração", "Estrela", "Flor", "Quadrado"]
+            },
+            {
+                id: "bolinha-antistress",
+                name: "Bolinha Anti-stress",
+                price: 4.80,
+                description: "Texturas internas fluidas que respondem à compressão.",
+                imgSrc: "image_3411b8.jpg",
+                category: "Propriocepção",
+                suboptionsTitle: "Material",
+                options: ["Gel", "Puffer Ball", "Espuma"]
+            },
+            {
+                id: "pulseira-sensorial",
+                name: "Pulseira Sensorial",
+                price: 3.65,
+                description: "Estímulo portátil no pulso, ideal para regulação corporal.",
+                imgSrc: "image_3427a2.jpg",
+                category: "Portátil",
+                suboptionsTitle: "Cor",
+                options: ["Amarelo", "Azul", "Rosa", "Roxo", "Verde"]
+            },
+            {
+                id: "pulseira-giratoria",
+                name: "Pulseira Giratória",
+                price: 20.75,
+                description: "Design interativo que permite girar peças ao redor do pulso.",
+                imgSrc: "image_3498db.jpg",
+                category: "Portátil",
+                suboptionsTitle: "Cor",
+                options: ["Prata", "Colorida", "Preta", "Dourada"]
+            },
+            {
+                id: "worry-stone",
+                name: "Worry Stone",
+                price: 14.30,
+                description: "Pedra com entalhe macio para fricção do polegar.",
+                imgSrc: "image_342b87.jpg",
+                category: "Alívio Imediato",
+                suboptionsTitle: "Tema",
+                options: ["Abacate", "Coruja", "Galáxia", "Gato", "Panda"]
+            },
+            {
+                id: "fidget-spinner",
+                name: "Fidget Spinner",
+                price: 11.90,
+                description: "Rolamento liso de alta qualidade para foco ocular.",
+                imgSrc: "image_348142.jpg",
+                category: "Ancoramento Ocular",
+                suboptionsTitle: "Cor",
+                options: ["Amarelo", "Azul", "Metalizado", "Preto", "Vermelho"]
+            },
+            {
+                id: "colar-mordedor",
+                name: "Colar Mordedor",
+                price: 22.25,
+                description: "Silicone alimentar macio de alta densidade.",
+                imgSrc: "image_3489d9.jpg",
+                category: "Regulação Oral",
+                suboptionsTitle: "Cor",
+                options: ["Azul", "Cinza", "Colorido", "Lilás"]
+            },
+            {
+                id: "mordedor-lapis",
+                name: "Mordedor para Lápis",
+                price: 18.25,
+                description: "Garante proteção da ponta traseira do lápis.",
+                imgSrc: "image_348cde.jpg",
+                category: "Apoio Escolar",
+                suboptionsTitle: "Modelo",
+                options: ["Azul", "Vermelho", "Verde", "Colorido"]
+            },
+            {
+                id: "infinity-ball",
+                name: "Infinity Ball",
+                price: 20.75,
+                description: "Esfera de montagem infinita para raciocínio e tato constante.",
+                imgSrc: "image_3490bd.jpg",
+                category: "Tátil Complexo",
+                suboptionsTitle: "Paleta de Cor",
+                options: ["Neon", "Pastel", "Primárias"]
+            }
+        ];
+
+        let selectedPack = { name: "Mochila Inflável 20 L", price: 46.20 };
+        let selectedProducts = {}; 
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCreatorProducts();
+            renderShowcaseProducts();
+            updateSummary();
+        });
+
+        function renderCreatorProducts() {
+            const grid = document.getElementById("creatorProductsGrid");
+            grid.innerHTML = "";
+            const filteredProducts = productsData.filter(p => p.id !== "mochila-inflavel");
+
+            filteredProducts.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "card creator-product-card";
+                card.id = `creator-card-${product.id}`;
+                let selectHTML = "";
+                const minVal = product.minQty || 1;
+
+                if (product.options) {
+                    if (product.isMultipleSquish) {
+                        selectHTML = `<div class="suboptions-wrapper"><span class="suboptions-title">${product.suboptionsTitle}</span>
+                            <select class="select-input" id="subopt-${product.id}-1" onchange="updateProductSubOptions('${product.id}')">${product.options.map((opt, i) => `<option value="${opt}" ${i===0?"selected":""}>Bicho 1: ${opt}</option>`).join("")}</select>
+                            <select class="select-input" id="subopt-${product.id}-2" onchange="updateProductSubOptions('${product.id}')">${product.options.map((opt, i) => `<option value="${opt}" ${i===1?"selected":""}>Bicho 2: ${opt}</option>`).join("")}</select>
+                            <select class="select-input" id="subopt-${product.id}-3" onchange="updateProductSubOptions('${product.id}')">${product.options.map((opt, i) => `<option value="${opt}" ${i===2?"selected":""}>Bicho 3: ${opt}</option>`).join("")}</select>
+                        </div>`;
+                    } else {
+                        selectHTML = `<div class="suboptions-wrapper"><span class="suboptions-title">${product.suboptionsTitle}</span>
+                            <select class="select-input" id="subopt-${product.id}" onchange="updateProductSubOptions('${product.id}')">${product.options.map(opt => `<option value="${opt}">${opt}</option>`).join("")}</select>
+                        </div>`;
+                    }
+                }
+
+                card.innerHTML = `
+                    <div>
+                        <img src="${product.imgSrc}" alt="${product.name}" class="product-real-img">
+                        <h4 class="creator-product-name">${product.name}</h4>
+                        <p class="creator-product-price">R$ ${product.price.toFixed(2).replace(".", ",")}</p>
+                    </div>
+                    ${selectHTML}
+                    <div class="qty-wrapper">
+                        <span class="suboptions-title">Qtd:</span>
+                        <div class="qty-btn" onclick="adjustQty('${product.id}', -1, ${minVal})">-</div>
+                        <input type="number" class="qty-input" id="qty-${product.id}" value="${minVal}" readonly min="${minVal}">
+                        <div class="qty-btn" onclick="adjustQty('${product.id}', 1, ${minVal})">+</div>
+                    </div>
+                    <button class="creator-product-btn add" id="btn-${product.id}" onclick="toggleProductSelection('${product.id}')">Adicionar ao Kit</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function adjustQty(prodId, amount, minVal) {
+            const input = document.getElementById(`qty-${prodId}`);
+            let val = parseInt(input.value) + amount;
+            if (val < minVal) val = minVal;
+            input.value = val;
+            if (selectedProducts[prodId]) {
+                selectedProducts[prodId].qty = val;
+                updateSummary();
+            }
+        }
+
+        function renderShowcaseProducts() {
+            const grid = document.getElementById("showcaseGrid");
+            grid.innerHTML = "";
+            productsData.forEach(p => {
+                const card = document.createElement("div");
+                card.className = "showcase-card";
+                card.innerHTML = `
+                    <img src="${p.imgSrc}" alt="${p.name}" class="product-real-img">
+                    <h3 class="showcase-name">${p.name}</h3>
+                    <p class="showcase-price">R$ ${p.price.toFixed(2).replace(".", ",")}</p>
+                    <p style="font-size:0.85rem; color:var(--text-dark); margin-bottom:16px;">${p.description}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function selectPack(packName, price) {
+            selectedPack = { name: packName, price: price };
+            document.querySelectorAll(".pack-card").forEach(c => c.classList.remove("selected"));
+            if (packName.includes("Mochila")) document.getElementById("pack-mochila").classList.add("selected");
+            else document.getElementById("pack-maleta").classList.add("selected");
+            updateSummary();
+        }
+
+        function toggleProductSelection(prodId) {
+            const product = productsData.find(p => p.id === prodId);
+            const btn = document.getElementById(`btn-${prodId}`);
+            const card = document.getElementById(`creator-card-${prodId}`);
+            const qtyInput = document.getElementById(`qty-${prodId}`);
+
+            if (selectedProducts[prodId]) {
+                delete selectedProducts[prodId];
+                btn.className = "creator-product-btn add";
+                btn.innerText = "Adicionar ao Kit";
+                card.classList.remove("selected");
+            } else {
+                let subOptionsArr = [];
+                if (product.isMultipleSquish) {
+                    subOptionsArr = [document.getElementById(`subopt-${prodId}-1`).value, document.getElementById(`subopt-${prodId}-2`).value, document.getElementById(`subopt-${prodId}-3`).value];
+                } else if (product.options) {
+                    subOptionsArr = [document.getElementById(`subopt-${prodId}`).value];
+                }
+                selectedProducts[prodId] = { name: product.name, price: product.price, qty: parseInt(qtyInput.value), subOptions: subOptionsArr };
+                btn.className = "creator-product-btn remove";
+                btn.innerText = "Remover do Kit";
+                card.classList.add("selected");
+            }
+            updateSummary();
+        }
+
+        function updateProductSubOptions(prodId) {
+            if (selectedProducts[prodId]) {
+                const product = productsData.find(p => p.id === prodId);
+                let subOptionsArr = [];
+                if (product.isMultipleSquish) {
+                    subOptionsArr = [document.getElementById(`subopt-${prodId}-1`).value, document.getElementById(`subopt-${prodId}-2`).value, document.getElementById(`subopt-${prodId}-3`).value];
+                } else if (product.options) {
+                    subOptionsArr = [document.getElementById(`subopt-${prodId}`).value];
+                }
+                selectedProducts[prodId].subOptions = subOptionsArr;
+                updateSummary();
+            }
+        }
+
+        function updateSummary() {
+            const content = document.getElementById("summaryContent");
+            const counter = document.getElementById("productsCounter");
+            const totalEl = document.getElementById("summaryTotal");
+
+            let html = `<div class="summary-group-title">Valor Base Obrigatório</div><div class="summary-item"><span class="summary-item-name">Base do Kit Plural</span><span>R$ 58,60</span></div>`;
+            html += `<div class="summary-group-title">Embalagem Escolhida</div><div class="summary-item"><span class="summary-item-name">${selectedPack.name}</span><span>R$ ${selectedPack.price.toFixed(2).replace(".", ",")}</span></div>`;
+
+            let total = selectedPack.price + 58.60;
+            let qty = 0;
+            const keys = Object.keys(selectedProducts);
+            
+            if (keys.length > 0) {
+                html += `<div class="summary-group-title">Produtos do Kit</div>`;
+                keys.forEach(k => {
+                    const p = selectedProducts[k];
+                    qty += p.qty;
+                    total += (p.price * p.qty);
+                    html += `<div class="summary-item"><span class="summary-item-name">${p.name} (x${p.qty})</span><span>R$ ${(p.price * p.qty).toFixed(2).replace(".", ",")}</span></div>`;
+                    if (p.subOptions && p.subOptions.length > 0) html += `<div class="summary-item-sub">Opção: ${p.subOptions.join(" + ")}</div>`;
+                });
+            } else {
+                html += `<div class="summary-empty-msg">Nenhum produto adicionado.</div>`;
+            }
+
+            content.innerHTML = html;
+            counter.innerText = `Produtos escolhidos: ${qty}`;
+            totalEl.innerText = `R$ ${total.toFixed(2).replace(".", ",")}`;
+        }
+
+        function triggerCheckout() {
+            let finalMsg = `Olá Plural Kids! Kit sensorial:\n\n📦 Embalagem: ${selectedPack.name} (R$ ${selectedPack.price.toFixed(2).replace(".", ",")})\n🏷️ Base: R$ 58,60\n\n🧸 Produtos:\n`;
+            let total = selectedPack.price + 58.60;
+            Object.keys(selectedProducts).forEach(k => {
+                const p = selectedProducts[k];
+                total += (p.price * p.qty);
+                finalMsg += `- ${p.name} (x${p.qty}) = R$ ${(p.price * p.qty).toFixed(2).replace(".", ",")}\n`;
+            });
+            finalMsg += `\n💵 Total: R$ ${total.toFixed(2).replace(".", ",")}\n`;
+            window.open(`https://api.whatsapp.com/send?phone=5511939542665&text=${encodeURIComponent(finalMsg)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
